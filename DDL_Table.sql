@@ -87,8 +87,8 @@ drop table VOUCHER;
 /*==============================================================*/
 create table BIOSKOP (
    ID_BIOSKOP           VARCHAR(15)          not null,
-   NAMA                 VARCHAR(50)          null,
-   LOKASI               VARCHAR(50)          null,
+   NAMA                 VARCHAR(50)          not null,
+   LOKASI               VARCHAR(50)          not null,
    constraint PK_BIOSKOP primary key (ID_BIOSKOP)
 );
 
@@ -105,8 +105,8 @@ ID_BIOSKOP
 create table FILM (
    ID_FILM              VARCHAR(15)          not null,
    ID_KATEGORI_FILM     VARCHAR(50)          not null,
-   JUDUL                VARCHAR(50)          null,
-   DURASI               INT4                 null,
+   JUDUL                VARCHAR(50)          not null,
+   DURASI               INT4                 not null,
    constraint PK_FILM primary key (ID_FILM)
 );
 
@@ -131,8 +131,8 @@ create table JADWAL (
    ID_JADWAL            VARCHAR(15)          not null,
    ID_FILM              VARCHAR(15)          not null,
    ID_STUDIO            VARCHAR(15)          not null,
-   WAKTU                DATE                 null,
-   HARGA                INT4                 null,
+   WAKTU                DATE                 not null,
+   HARGA                INT4                 not null,
    constraint PK_JADWAL primary key (ID_JADWAL)
 );
 
@@ -162,7 +162,7 @@ ID_FILM
 /*==============================================================*/
 create table KATEGORI_FILM (
    ID_KATEGORI_FILM     VARCHAR(50)          not null,
-   NAMA                 VARCHAR(50)          null,
+   NAMA                 VARCHAR(50)          not null,
    constraint PK_KATEGORI_FILM primary key (ID_KATEGORI_FILM)
 );
 
@@ -202,11 +202,11 @@ ID_JADWAL
 create table METODE_PEMBAYARAN (
    ID_METODE_PEMBAYARAN VARCHAR(15)          not null,
    ID_PELANGGAN         VARCHAR(15)          not null,
-   JENIS                VARCHAR(10)          null,
-   BANK                 VARCHAR(10)          null,
-   NOMOR_KARTU          VARCHAR(16)          null,
-   EXPIRED              VARCHAR(4)           null,
-   CVV                  VARCHAR(3)           null,
+   JENIS                VARCHAR(10)          not null,
+   BANK                 VARCHAR(10)          not null,
+   NOMOR_KARTU          VARCHAR(16)          not null,
+   EXPIRED              VARCHAR(4)           not null,
+   CVV                  VARCHAR(3)           not null,
    constraint PK_METODE_PEMBAYARAN primary key (ID_METODE_PEMBAYARAN)
 );
 
@@ -229,9 +229,9 @@ ID_PELANGGAN
 /*==============================================================*/
 create table PELANGGAN (
    ID_PELANGGAN         VARCHAR(15)          not null,
-   NAMA                 VARCHAR(50)          null,
-   EMAIL                VARCHAR(50)          null,
-   NO_TELEPON           VARCHAR(15)          null,
+   NAMA                 VARCHAR(50)          not null,
+   EMAIL                VARCHAR(50)          not null,
+   NO_TELEPON           VARCHAR(15)          not null,
    constraint PK_PELANGGAN primary key (ID_PELANGGAN)
 );
 
@@ -310,7 +310,7 @@ ID_VOUCHER
 create table STUDIO (
    ID_STUDIO            VARCHAR(15)          not null,
    ID_BIOSKOP           VARCHAR(15)          not null,
-   KAPASITAS            INT4                 null,
+   KAPASITAS            INT4                 not null,
    constraint PK_STUDIO primary key (ID_STUDIO)
 );
 
@@ -358,7 +358,7 @@ create table TRANSAKSI (
    ID_TRANSAKSI         VARCHAR(15)          not null,
    ID_PELANGGAN         VARCHAR(15)          not null,
    ID_METODE_PEMBAYARAN VARCHAR(15)          not null,
-   TOTAL_HARGA          INT4                 null,
+   TOTAL_HARGA          INT4                 not null,
    constraint PK_TRANSAKSI primary key (ID_TRANSAKSI)
 );
 
@@ -388,8 +388,8 @@ ID_METODE_PEMBAYARAN
 /*==============================================================*/
 create table VOUCHER (
    ID_VOUCHER           VARCHAR(15)          not null,
-   KODE_VOUCHER         VARCHAR(15)          null,
-   NOMINAL              INT4                 null,
+   KODE_VOUCHER         VARCHAR(15)          not null,
+   NOMINAL              INT4                 not null,
    constraint PK_VOUCHER primary key (ID_VOUCHER)
 );
 
