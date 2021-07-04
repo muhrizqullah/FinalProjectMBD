@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     7/4/2021 2:50:29 PM                          */
+/* Created on:     7/4/2021 7:25:54 PM                          */
 /*==============================================================*/
 
 
@@ -42,14 +42,6 @@ drop index PELANGGAN_PK;
 
 drop table PELANGGAN;
 
-drop index RELATIONSHIP_12_FK;
-
-drop index RELATIONSHIP_11_FK;
-
-drop index RELATIONSHIP_10_PK;
-
-drop table RELATIONSHIP_10;
-
 drop index RELATIONSHIP_9_FK;
 
 drop index RELATIONSHIP_8_FK;
@@ -64,13 +56,23 @@ drop index STUDIO_PK;
 
 drop table STUDIO;
 
-drop index RELATIONSHIP_14_FK;
+drop index RELATIONSHIP_18_FK;
+
+drop index RELATIONSHIP_17_FK;
+
+drop index RELATIONSHIP_16_FK;
+
+drop index RELATIONSHIP_15_FK;
+
+drop index RELATIONSHIP_13_FK;
+
+drop index RELATIONSHIP_12_FK;
 
 drop index TIKET_PK;
 
 drop table TIKET;
 
-drop index RELATIONSHIP_13_FK;
+drop index RELATIONSHIP_11_FK;
 
 drop index RELATIONSHIP_6_FK;
 
@@ -86,382 +88,430 @@ drop table VOUCHER;
 /* Table: BIOSKOP                                               */
 /*==============================================================*/
 create table BIOSKOP (
-   ID_BIOSKOP           VARCHAR(15)          not null,
-   NAMA                 VARCHAR(50)          not null,
-   LOKASI               VARCHAR(50)          not null,
-   constraint PK_BIOSKOP primary key (ID_BIOSKOP)
+   CIN_ID               VARCHAR(15)          not null,
+   CIN_NAMA             VARCHAR(50)          null,
+   CIN_LOKASI           VARCHAR(50)          not null,
+   CIN_CREATED_AT       DATE                 null,
+   CIN_UPDATED_AT       DATE                 null,
+   constraint PK_BIOSKOP primary key (CIN_ID)
 );
 
 /*==============================================================*/
 /* Index: BIOSKOP_PK                                            */
 /*==============================================================*/
 create unique index BIOSKOP_PK on BIOSKOP (
-ID_BIOSKOP
+CIN_ID
 );
 
 /*==============================================================*/
 /* Table: FILM                                                  */
 /*==============================================================*/
 create table FILM (
-   ID_FILM              VARCHAR(15)          not null,
-   ID_KATEGORI_FILM     VARCHAR(50)          not null,
-   JUDUL                VARCHAR(50)          not null,
-   DURASI               INT4                 not null,
-   constraint PK_FILM primary key (ID_FILM)
+   MOV_ID               VARCHAR(15)          not null,
+   CAT_ID               VARCHAR(15)          not null,
+   MOV_JUDUL            VARCHAR(50)          not null,
+   MOV_DURASI           INT4                 not null,
+   MOV_CREATED_AT       DATE                 null,
+   MOV_UPDATED_AT       DATE                 null,
+   constraint PK_FILM primary key (MOV_ID)
 );
 
 /*==============================================================*/
 /* Index: FILM_PK                                               */
 /*==============================================================*/
 create unique index FILM_PK on FILM (
-ID_FILM
+MOV_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_2_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_2_FK on FILM (
-ID_KATEGORI_FILM
+CAT_ID
 );
 
 /*==============================================================*/
 /* Table: JADWAL                                                */
 /*==============================================================*/
 create table JADWAL (
-   ID_JADWAL            VARCHAR(15)          not null,
-   ID_FILM              VARCHAR(15)          not null,
-   ID_STUDIO            VARCHAR(15)          not null,
-   WAKTU                DATE                 not null,
-   HARGA                INT4                 not null,
-   constraint PK_JADWAL primary key (ID_JADWAL)
+   SCH_ID               VARCHAR(15)          not null,
+   MOV_ID               VARCHAR(15)          not null,
+   STD_ID               VARCHAR(15)          not null,
+   SCH_WAKTU            DATE                 not null,
+   SCH_HARGA            INT4                 null,
+   SCH_CREATED_AT       DATE                 null,
+   SCH_UPDATED_AT       DATE                 null,
+   constraint PK_JADWAL primary key (SCH_ID)
 );
 
 /*==============================================================*/
 /* Index: JADWAL_PK                                             */
 /*==============================================================*/
 create unique index JADWAL_PK on JADWAL (
-ID_JADWAL
+SCH_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_4_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_4_FK on JADWAL (
-ID_STUDIO
+STD_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_10_FK                                    */
 /*==============================================================*/
 create  index RELATIONSHIP_10_FK on JADWAL (
-ID_FILM
+MOV_ID
 );
 
 /*==============================================================*/
 /* Table: KATEGORI_FILM                                         */
 /*==============================================================*/
 create table KATEGORI_FILM (
-   ID_KATEGORI_FILM     VARCHAR(50)          not null,
-   NAMA                 VARCHAR(50)          not null,
-   constraint PK_KATEGORI_FILM primary key (ID_KATEGORI_FILM)
+   CAT_ID               VARCHAR(15)          not null,
+   CAT_NAMA             VARCHAR(50)          not null,
+   CAT_CREATED_AT       DATE                 null,
+   CAT_UPDATED_AT       DATE                 null,
+   constraint PK_KATEGORI_FILM primary key (CAT_ID)
 );
 
 /*==============================================================*/
 /* Index: KATEGORI_FILM_PK                                      */
 /*==============================================================*/
 create unique index KATEGORI_FILM_PK on KATEGORI_FILM (
-ID_KATEGORI_FILM
+CAT_ID
 );
 
 /*==============================================================*/
 /* Table: KURSI                                                 */
 /*==============================================================*/
 create table KURSI (
-   ID_KURSI             CHAR(10)             not null,
-   ID_JADWAL            VARCHAR(15)          not null,
-   constraint PK_KURSI primary key (ID_KURSI)
+   CHR_ID               VARCHAR(15)          not null,
+   SCH_ID               VARCHAR(15)          not null,
+   CHR_KODE             VARCHAR(3)           not null,
+   CHR_CREATED_AT       DATE                 null,
+   CHR_UPDATED_AT       DATE                 null,
+   constraint PK_KURSI primary key (CHR_ID)
 );
 
 /*==============================================================*/
 /* Index: KURSI_PK                                              */
 /*==============================================================*/
 create unique index KURSI_PK on KURSI (
-ID_KURSI
+CHR_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_5_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_5_FK on KURSI (
-ID_JADWAL
+SCH_ID
 );
 
 /*==============================================================*/
 /* Table: METODE_PEMBAYARAN                                     */
 /*==============================================================*/
 create table METODE_PEMBAYARAN (
-   ID_METODE_PEMBAYARAN VARCHAR(15)          not null,
-   ID_PELANGGAN         VARCHAR(15)          not null,
-   JENIS                VARCHAR(10)          not null,
-   BANK                 VARCHAR(10)          not null,
-   NOMOR_KARTU          VARCHAR(16)          not null,
-   EXPIRED              VARCHAR(4)           not null,
-   CVV                  VARCHAR(3)           not null,
-   constraint PK_METODE_PEMBAYARAN primary key (ID_METODE_PEMBAYARAN)
+   MTD_ID               VARCHAR(15)          not null,
+   PEL_ID               VARCHAR(15)          not null,
+   MTD_JENIS            VARCHAR(10)          not null,
+   MTD_BANK             VARCHAR(10)          not null,
+   MTD_NOMOR_KARTU      VARCHAR(16)          not null,
+   MTD_EXPIRED          VARCHAR(4)           not null,
+   MTD_CVV              VARCHAR(3)           not null,
+   MTD_CREATED_AT       DATE                 null,
+   MTD_UPDATED_AT       DATE                 null,
+   constraint PK_METODE_PEMBAYARAN primary key (MTD_ID)
 );
 
 /*==============================================================*/
 /* Index: METODE_PEMBAYARAN_PK                                  */
 /*==============================================================*/
 create unique index METODE_PEMBAYARAN_PK on METODE_PEMBAYARAN (
-ID_METODE_PEMBAYARAN
+MTD_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_7_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_7_FK on METODE_PEMBAYARAN (
-ID_PELANGGAN
+PEL_ID
 );
 
 /*==============================================================*/
 /* Table: PELANGGAN                                             */
 /*==============================================================*/
 create table PELANGGAN (
-   ID_PELANGGAN         VARCHAR(15)          not null,
-   NAMA                 VARCHAR(50)          not null,
-   EMAIL                VARCHAR(50)          not null,
-   NO_TELEPON           VARCHAR(15)          not null,
-   constraint PK_PELANGGAN primary key (ID_PELANGGAN)
+   PEL_ID               VARCHAR(15)          not null,
+   PEL_NAMA             VARCHAR(50)          not null,
+   PEL_EMAIL            VARCHAR(50)          not null,
+   PEL_NO_TELEPON       VARCHAR(15)          not null,
+   PEL_CREATED_AT       DATE                 null,
+   PEL_UPDATED_AT       DATE                 null,
+   constraint PK_PELANGGAN primary key (PEL_ID)
 );
 
 /*==============================================================*/
 /* Index: PELANGGAN_PK                                          */
 /*==============================================================*/
 create unique index PELANGGAN_PK on PELANGGAN (
-ID_PELANGGAN
-);
-
-/*==============================================================*/
-/* Table: RELATIONSHIP_10                                       */
-/*==============================================================*/
-create table RELATIONSHIP_10 (
-   ID_TRANSAKSI         VARCHAR(15)          not null,
-   ID_JADWAL            VARCHAR(15)          not null,
-   constraint PK_RELATIONSHIP_10 primary key (ID_TRANSAKSI, ID_JADWAL)
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_10_PK                                    */
-/*==============================================================*/
-create unique index RELATIONSHIP_10_PK on RELATIONSHIP_10 (
-ID_TRANSAKSI,
-ID_JADWAL
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_11_FK                                    */
-/*==============================================================*/
-create  index RELATIONSHIP_11_FK on RELATIONSHIP_10 (
-ID_TRANSAKSI
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_12_FK                                    */
-/*==============================================================*/
-create  index RELATIONSHIP_12_FK on RELATIONSHIP_10 (
-ID_JADWAL
+PEL_ID
 );
 
 /*==============================================================*/
 /* Table: RELATIONSHIP_8                                        */
 /*==============================================================*/
 create table RELATIONSHIP_8 (
-   ID_TRANSAKSI         VARCHAR(15)          not null,
-   ID_VOUCHER           VARCHAR(15)          not null,
-   constraint PK_RELATIONSHIP_8 primary key (ID_TRANSAKSI, ID_VOUCHER)
+   TRX_ID               VARCHAR(15)          not null,
+   VOC_ID               VARCHAR(15)          not null,
+   constraint PK_RELATIONSHIP_8 primary key (TRX_ID, VOC_ID)
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_8_PK                                     */
 /*==============================================================*/
 create unique index RELATIONSHIP_8_PK on RELATIONSHIP_8 (
-ID_TRANSAKSI,
-ID_VOUCHER
+TRX_ID,
+VOC_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_8_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_8_FK on RELATIONSHIP_8 (
-ID_TRANSAKSI
+TRX_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_9_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_9_FK on RELATIONSHIP_8 (
-ID_VOUCHER
+VOC_ID
 );
 
 /*==============================================================*/
 /* Table: STUDIO                                                */
 /*==============================================================*/
 create table STUDIO (
-   ID_STUDIO            VARCHAR(15)          not null,
-   ID_BIOSKOP           VARCHAR(15)          not null,
-   KAPASITAS            INT4                 not null,
-   constraint PK_STUDIO primary key (ID_STUDIO)
+   STD_ID               VARCHAR(15)          not null,
+   CIN_ID               VARCHAR(15)          not null,
+   STD_KAPASITAS        INT4                 not null,
+   STD_CREATED_AT       DATE                 null,
+   STD_UPDATED_AT       DATE                 null,
+   constraint PK_STUDIO primary key (STD_ID)
 );
 
 /*==============================================================*/
 /* Index: STUDIO_PK                                             */
 /*==============================================================*/
 create unique index STUDIO_PK on STUDIO (
-ID_STUDIO
+STD_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_3_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_3_FK on STUDIO (
-ID_BIOSKOP
+CIN_ID
 );
 
 /*==============================================================*/
 /* Table: TIKET                                                 */
 /*==============================================================*/
 create table TIKET (
-   ID_TIKET             VARCHAR(15)          not null,
-   ID_TRANSAKSI         VARCHAR(15)          not null,
-   constraint PK_TIKET primary key (ID_TIKET)
+   TIK_ID               VARCHAR(15)          not null,
+   MOV_ID               VARCHAR(15)          not null,
+   TRX_ID               VARCHAR(15)          not null,
+   SCH_ID               VARCHAR(15)          not null,
+   CIN_ID               VARCHAR(15)          not null,
+   STD_ID               VARCHAR(15)          not null,
+   CHR_ID               VARCHAR(15)          null,
+   TIK_CREATED_AT       DATE                 null,
+   TIK_UPDATED_AT       DATE                 null,
+   constraint PK_TIKET primary key (TIK_ID)
 );
 
 /*==============================================================*/
 /* Index: TIKET_PK                                              */
 /*==============================================================*/
 create unique index TIKET_PK on TIKET (
-ID_TIKET
+TIK_ID
 );
 
 /*==============================================================*/
-/* Index: RELATIONSHIP_14_FK                                    */
+/* Index: RELATIONSHIP_12_FK                                    */
 /*==============================================================*/
-create  index RELATIONSHIP_14_FK on TIKET (
-ID_TRANSAKSI
+create  index RELATIONSHIP_12_FK on TIKET (
+TRX_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_13_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_13_FK on TIKET (
+SCH_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_15_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_15_FK on TIKET (
+STD_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_16_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_16_FK on TIKET (
+CHR_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_17_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_17_FK on TIKET (
+MOV_ID
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_18_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_18_FK on TIKET (
+CIN_ID
 );
 
 /*==============================================================*/
 /* Table: TRANSAKSI                                             */
 /*==============================================================*/
 create table TRANSAKSI (
-   ID_TRANSAKSI         VARCHAR(15)          not null,
-   ID_PELANGGAN         VARCHAR(15)          not null,
-   ID_METODE_PEMBAYARAN VARCHAR(15)          not null,
-   TOTAL_HARGA          INT4                 not null,
-   constraint PK_TRANSAKSI primary key (ID_TRANSAKSI)
+   TRX_ID               VARCHAR(15)          not null,
+   PEL_ID               VARCHAR(15)          not null,
+   MTD_ID               VARCHAR(15)          not null,
+   TRX_TOTAL_HARGA      INT4                 null,
+   TRX_TOTAL_TIKET      INT4                 null,
+   TRX_CREATED_AT       DATE                 null,
+   TRX_UPDATED_AT       DATE                 null,
+   constraint PK_TRANSAKSI primary key (TRX_ID)
 );
 
 /*==============================================================*/
 /* Index: TRANSAKSI_PK                                          */
 /*==============================================================*/
 create unique index TRANSAKSI_PK on TRANSAKSI (
-ID_TRANSAKSI
+TRX_ID
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_6_FK                                     */
 /*==============================================================*/
 create  index RELATIONSHIP_6_FK on TRANSAKSI (
-ID_PELANGGAN
+PEL_ID
 );
 
 /*==============================================================*/
-/* Index: RELATIONSHIP_13_FK                                    */
+/* Index: RELATIONSHIP_11_FK                                    */
 /*==============================================================*/
-create  index RELATIONSHIP_13_FK on TRANSAKSI (
-ID_METODE_PEMBAYARAN
+create  index RELATIONSHIP_11_FK on TRANSAKSI (
+MTD_ID
 );
 
 /*==============================================================*/
 /* Table: VOUCHER                                               */
 /*==============================================================*/
 create table VOUCHER (
-   ID_VOUCHER           VARCHAR(15)          not null,
-   KODE_VOUCHER         VARCHAR(15)          not null,
-   NOMINAL              INT4                 not null,
-   constraint PK_VOUCHER primary key (ID_VOUCHER)
+   VOC_ID               VARCHAR(15)          not null,
+   VOC_KODE_VOUCHER     VARCHAR(15)          not null,
+   VOC_NOMINAL          INT4                 not null,
+   VOC_CREATED_AT       DATE                 null,
+   VOC_UPDATED_AT       DATE                 null,
+   constraint PK_VOUCHER primary key (VOC_ID)
 );
 
 /*==============================================================*/
 /* Index: VOUCHER_PK                                            */
 /*==============================================================*/
 create unique index VOUCHER_PK on VOUCHER (
-ID_VOUCHER
+VOC_ID
 );
 
 alter table FILM
-   add constraint FK_FILM_RELATIONS_KATEGORI foreign key (ID_KATEGORI_FILM)
-      references KATEGORI_FILM (ID_KATEGORI_FILM)
+   add constraint FK_FILM_RELATIONS_KATEGORI foreign key (CAT_ID)
+      references KATEGORI_FILM (CAT_ID)
       on delete restrict on update restrict;
 
 alter table JADWAL
-   add constraint FK_JADWAL_RELATIONS_FILM foreign key (ID_FILM)
-      references FILM (ID_FILM)
+   add constraint FK_JADWAL_RELATIONS_FILM foreign key (MOV_ID)
+      references FILM (MOV_ID)
       on delete restrict on update restrict;
 
 alter table JADWAL
-   add constraint FK_JADWAL_RELATIONS_STUDIO foreign key (ID_STUDIO)
-      references STUDIO (ID_STUDIO)
+   add constraint FK_JADWAL_RELATIONS_STUDIO foreign key (STD_ID)
+      references STUDIO (STD_ID)
       on delete restrict on update restrict;
 
 alter table KURSI
-   add constraint FK_KURSI_RELATIONS_JADWAL foreign key (ID_JADWAL)
-      references JADWAL (ID_JADWAL)
+   add constraint FK_KURSI_RELATIONS_JADWAL foreign key (SCH_ID)
+      references JADWAL (SCH_ID)
       on delete restrict on update restrict;
 
 alter table METODE_PEMBAYARAN
-   add constraint FK_METODE_P_RELATIONS_PELANGGA foreign key (ID_PELANGGAN)
-      references PELANGGAN (ID_PELANGGAN)
-      on delete restrict on update restrict;
-
-alter table RELATIONSHIP_10
-   add constraint FK_RELATION_RELATIONS_TRANSAKS foreign key (ID_TRANSAKSI)
-      references TRANSAKSI (ID_TRANSAKSI)
-      on delete restrict on update restrict;
-
-alter table RELATIONSHIP_10
-   add constraint FK_RELATION_RELATIONS_JADWAL foreign key (ID_JADWAL)
-      references JADWAL (ID_JADWAL)
+   add constraint FK_METODE_P_RELATIONS_PELANGGA foreign key (PEL_ID)
+      references PELANGGAN (PEL_ID)
       on delete restrict on update restrict;
 
 alter table RELATIONSHIP_8
-   add constraint FK_RELATION_RELATIONS_TRANSAKS foreign key (ID_TRANSAKSI)
-      references TRANSAKSI (ID_TRANSAKSI)
+   add constraint FK_RELATION_RELATIONS_TRANSAKS foreign key (TRX_ID)
+      references TRANSAKSI (TRX_ID)
       on delete restrict on update restrict;
 
 alter table RELATIONSHIP_8
-   add constraint FK_RELATION_RELATIONS_VOUCHER foreign key (ID_VOUCHER)
-      references VOUCHER (ID_VOUCHER)
+   add constraint FK_RELATION_RELATIONS_VOUCHER foreign key (VOC_ID)
+      references VOUCHER (VOC_ID)
       on delete restrict on update restrict;
 
 alter table STUDIO
-   add constraint FK_STUDIO_RELATIONS_BIOSKOP foreign key (ID_BIOSKOP)
-      references BIOSKOP (ID_BIOSKOP)
+   add constraint FK_STUDIO_RELATIONS_BIOSKOP foreign key (CIN_ID)
+      references BIOSKOP (CIN_ID)
       on delete restrict on update restrict;
 
 alter table TIKET
-   add constraint FK_TIKET_RELATIONS_TRANSAKS foreign key (ID_TRANSAKSI)
-      references TRANSAKSI (ID_TRANSAKSI)
+   add constraint FK_TIKET_RELATIONS_TRANSAKS foreign key (TRX_ID)
+      references TRANSAKSI (TRX_ID)
+      on delete restrict on update restrict;
+
+alter table TIKET
+   add constraint FK_TIKET_RELATIONS_JADWAL foreign key (SCH_ID)
+      references JADWAL (SCH_ID)
+      on delete restrict on update restrict;
+
+alter table TIKET
+   add constraint FK_TIKET_RELATIONS_STUDIO foreign key (STD_ID)
+      references STUDIO (STD_ID)
+      on delete restrict on update restrict;
+
+alter table TIKET
+   add constraint FK_TIKET_RELATIONS_KURSI foreign key (CHR_ID)
+      references KURSI (CHR_ID)
+      on delete restrict on update restrict;
+
+alter table TIKET
+   add constraint FK_TIKET_RELATIONS_FILM foreign key (MOV_ID)
+      references FILM (MOV_ID)
+      on delete restrict on update restrict;
+
+alter table TIKET
+   add constraint FK_TIKET_RELATIONS_BIOSKOP foreign key (CIN_ID)
+      references BIOSKOP (CIN_ID)
       on delete restrict on update restrict;
 
 alter table TRANSAKSI
-   add constraint FK_TRANSAKS_RELATIONS_METODE_P foreign key (ID_METODE_PEMBAYARAN)
-      references METODE_PEMBAYARAN (ID_METODE_PEMBAYARAN)
+   add constraint FK_TRANSAKS_RELATIONS_METODE_P foreign key (MTD_ID)
+      references METODE_PEMBAYARAN (MTD_ID)
       on delete restrict on update restrict;
 
 alter table TRANSAKSI
-   add constraint FK_TRANSAKS_RELATIONS_PELANGGA foreign key (ID_PELANGGAN)
-      references PELANGGAN (ID_PELANGGAN)
+   add constraint FK_TRANSAKS_RELATIONS_PELANGGA foreign key (PEL_ID)
+      references PELANGGAN (PEL_ID)
       on delete restrict on update restrict;
 
