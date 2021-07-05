@@ -127,7 +127,7 @@ create table TIKET (
    STD_ID               VARCHAR(15)          not null,
    CHR_ID               VARCHAR(15)          null,
    TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
-   TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
+   TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
 
 /*==============================================================*/
