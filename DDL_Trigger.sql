@@ -300,3 +300,23 @@ $VOC_UpdatedAtAutomation$ LANGUAGE plpgsql;
 
 CREATE TRIGGER VOC_UpdatedAtAutomation BEFORE UPDATE ON VOUCHER
 FOR EACH ROW EXECUTE VOC_UpdatedAtAutomation();
+
+-- TRIGGER
+/*==============================================================*/
+/* Automate Price (Weekdays and Weekends)                       */
+/*==============================================================*/
+CREATE OR REPLACE FUNCTION weekendPriceAutomation() RETURNS TRIGGER AS $weekendPriceAutomation$
+    BEGIN
+        -- Weekends
+        IF(((SELECT to_char(NEW.SCH_WAKTU, 'DY')) = 'SAT') OR ((SELECT to_char(NEW.SCH_WAKTU, 'DY')) = 'SUN')) THEN
+			NEW.SCH_HARGA = '50000';
+        -- Weekdays
+        ELSE
+            NEW.SCH_HARGA = '35000';
+		END IF;
+		RETURN NEW;
+    END;
+$weekendPriceAutomation$ LANGUAGE plpgsql;
+
+CREATE TRIGGER weekendPriceAutomation BEFORE INSERT ON JADWAL
+FOR EACH ROW EXECUTE FUNCTION weekendPriceAutomation();
