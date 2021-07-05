@@ -40,7 +40,7 @@ create table JADWAL (
    SCH_ID               VARCHAR(15)          PRIMARY KEY,
    MOV_ID               VARCHAR(15)          not null,
    STD_ID               VARCHAR(15)          not null,
-   SCH_WAKTU            DATE                 not null,
+   SCH_WAKTU            TIMESTAMPTZ          not null,
    SCH_HARGA            INTEGER,
    SCH_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    SCH_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
