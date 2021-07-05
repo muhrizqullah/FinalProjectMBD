@@ -1,7 +1,14 @@
-/*==============================================================*/
-/* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     7/4/2021 7:25:54 PM                          */
-/*==============================================================*/
+CREATE SEQUENCE Bioskop_Seq;
+CREATE SEQUENCE Film_Seq;
+CREATE SEQUENCE Jadwal_Seq;
+CREATE SEQUENCE Kategori_Seq;
+CREATE SEQUENCE Kursi_Seq;
+CREATE SEQUENCE Metode_Seq;
+CREATE SEQUENCE Pelanggan_Seq;
+CREATE SEQUENCE Studio_Seq;
+CREATE SEQUENCE Tiket_Seq;
+CREATE SEQUENCE Transaksi_Seq;
+CREATE SEQUENCE Voucher_Seq;
 
 /*==============================================================*/
 /* Table: BIOSKOP                                               */
