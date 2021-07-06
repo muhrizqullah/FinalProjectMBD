@@ -325,7 +325,40 @@ FOR EACH ROW EXECUTE FUNCTION weekendPriceAutomation();
 /*==============================================================*/
 /* Automate Price Calculation and Total Tickets                 */
 /*==============================================================*/
+CREATE OR REPLACE FUNCTION PriceAutomation() RETURNS TRIGGER AS $PriceAutomation$
+    BEGIN
+		IF (TG_OP = 'INSERT') THEN
+			-- Update Total Produk
+			UPDATE Transaksi SET TRX_TOTAL_TIKET = (SELECT COUNT(TIK_ID) FROM TIKET WHERE TIKET.TRX_ID = NEW.TRX_ID)
+				WHERE TRX_ID = NEW.TRX_ID;
+			-- Update Total Harga
+			UPDATE Transaksi SET TRX_TOTAL_HARGA = (SELECT SUM(SCH_HARGA) 
+													FROM TIKET JOIN JADWAL ON TIKET.SCH_ID = JADWAL.SCH_ID
+													WHERE TIKET.TRX_ID = NEW.TRX_ID) -
+                                                    (SELECT SUM(VOC_NOMINAL)
+                                                    FROM VOUCHER, TRANSAKSI, DetailVoucher
+                                                    WHERE DetailVoucher.TRX_ID = TRANSAKSI.TRX_ID AND DetailVoucher.VOC_ID = VOUCHER.VOC_ID 
+                                                    AND TRANSAKSI.TRX_ID=NEW.TRX_ID)
+				WHERE TRX_ID = NEW.TRX_ID;
+		ELSIF (TG_OP = 'DELETE') THEN
+			UPDATE TRANSAKSI SET TRX_TOTAL_TIKET = (SELECT COUNT(TIK_ID) FROM TIKET WHERE TIKET.TRX_ID = OLD.TRX_ID)
+				WHERE TRX_ID = OLD.TRX_ID;
+			-- Update Total Harga
+			UPDATE TRANSAKSI SET TRX_TOTAL_HARGA = (SELECT SUM(SCH_HARGA) 
+													    FROM TIKET JOIN JADWAL ON TIKET.SCH_ID = JADWAL.SCH_ID
+													    WHERE TIKET.TRX_ID = OLD.TRX_ID) -
+                                                        (SELECT SUM(VOC_NOMINAL)
+                                                        FROM VOUCHER, TRANSAKSI, DetailVoucher
+                                                        WHERE DetailVoucher.TRX_ID = TRANSAKSI.TRX_ID AND DetailVoucher.VOC_ID = VOUCHER.VOC_ID 
+                                                        AND TRANSAKSI.TRX_ID=OLD.TRX_ID)
+				WHERE TRX_ID = OLD.TRX_ID;
+		END IF;
+		RETURN NEW;
+    END;
+$PriceAutomation$ LANGUAGE plpgsql;
 
+CREATE TRIGGER PriceAutomation AFTER INSERT OR DELETE ON TIKET
+FOR EACH ROW EXECUTE FUNCTION PriceAutomation();
 
 -- TRIGGER
 /*==============================================================*/
