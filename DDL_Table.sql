@@ -73,7 +73,7 @@ create table KURSI (
 create table METODE_PEMBAYARAN (
    MTD_ID               VARCHAR(15)          PRIMARY KEY,
    PEL_ID               VARCHAR(15)          not null,
-   MTD_JENIS            VARCHAR(10)          not null,
+   MTD_JENIS            VARCHAR(10)          CHECK (MTD_JENIS IN ( 'DEBIT', 'KREDIT')),
    MTD_BANK             VARCHAR(10)          not null,
    MTD_NOMOR_KARTU      VARCHAR(16)          not null,
    MTD_EXPIRED          VARCHAR(4)           not null,
