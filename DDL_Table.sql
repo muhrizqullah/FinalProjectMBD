@@ -75,7 +75,7 @@ create table METODE_PEMBAYARAN (
    MTD_ID               VARCHAR(50)          PRIMARY KEY,
    PEL_ID               VARCHAR(50)          NOT NULL,
    MTD_JENIS            VARCHAR(10)          NOT NULL,
-   MTD_BANK             VARCHAR(10)          NOT NULL,
+   MTD_BANK             VARCHAR(50)          NOT NULL,
    MTD_NOMOR_KARTU      VARCHAR(16)          NOT NULL,
    MTD_EXPIRED          VARCHAR(5)           NOT NULL,
    MTD_CVV              VARCHAR(3)           NOT NULL,
