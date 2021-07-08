@@ -77,7 +77,7 @@ create table METODE_PEMBAYARAN (
    MTD_JENIS            VARCHAR(10)          NOT NULL,
    MTD_BANK             VARCHAR(10)          NOT NULL,
    MTD_NOMOR_KARTU      VARCHAR(16)          NOT NULL,
-   MTD_EXPIRED          VARCHAR(4)           NOT NULL,
+   MTD_EXPIRED          VARCHAR(5)           NOT NULL,
    MTD_CVV              VARCHAR(3)           NOT NULL,
    MTD_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    MTD_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
