@@ -97,7 +97,7 @@ create table PELANGGAN (
 /*==============================================================*/
 /* Table: DetailVoucher                                         */
 /*==============================================================*/
-create table DetailVoucher (
+create table DETAIL_VOUCHER (
    TRX_ID               VARCHAR(15),
    VOC_ID               VARCHAR(15),
    DV_Created_At        TIMESTAMPTZ          DEFAULT NOW(),
@@ -176,11 +176,11 @@ alter table METODE_PEMBAYARAN
    add constraint FK_METODE_P_RELATIONS_PELANGGA foreign key (PEL_ID)
       references PELANGGAN (PEL_ID);
 
-alter table RELATIONSHIP_8
+alter table DETAIL_VOUCHER
    add constraint FK_RELATION_RELATIONS_TRANSAKS foreign key (TRX_ID)
       references TRANSAKSI (TRX_ID);
 
-alter table RELATIONSHIP_8
+alter table DETAIL_VOUCHER
    add constraint FK_RELATION_RELATIONS_VOUCHER foreign key (VOC_ID)
       references VOUCHER (VOC_ID);
 
