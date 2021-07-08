@@ -200,4 +200,3 @@ alter table TRANSAKSI
 alter table TRANSAKSI
    add constraint FK_TRANSAKS_RELATIONS_PELANGGA foreign key (PEL_ID)
       references PELANGGAN (PEL_ID);
-
