@@ -63,7 +63,7 @@ create table KURSI (
    CHR_ID               VARCHAR(50)          PRIMARY KEY,
    TIK_ID               VARCHAR(50)          NOT NULL,
    SCH_ID               VARCHAR(50)          NOT NULL,
-   CHR_KODE             VARCHAR(3)           NOT NULL,
+   CHR_KODE             VARCHAR(20)           NOT NULL,
    CHR_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CHR_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -74,7 +74,7 @@ create table KURSI (
 create table METODE_PEMBAYARAN (
    MTD_ID               VARCHAR(50)          PRIMARY KEY,
    PEL_ID               VARCHAR(50)          NOT NULL,
-   MTD_JENIS            VARCHAR(10)          NOT NULL,
+   MTD_JENIS            VARCHAR(50)          NOT NULL,
    MTD_BANK             VARCHAR(50)          NOT NULL,
    MTD_NOMOR_KARTU      VARCHAR(16)          NOT NULL,
    MTD_EXPIRED          VARCHAR(5)           NOT NULL,
@@ -200,4 +200,3 @@ alter table TRANSAKSI
 alter table TRANSAKSI
    add constraint FK_TRANSAKS_RELATIONS_PELANGGA foreign key (PEL_ID)
       references PELANGGAN (PEL_ID);
-
