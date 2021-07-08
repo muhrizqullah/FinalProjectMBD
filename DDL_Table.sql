@@ -14,7 +14,7 @@ CREATE SEQUENCE Voucher_Seq;
 /* Table: BIOSKOP                                               */
 /*==============================================================*/
 create table BIOSKOP (
-   CIN_ID               VARCHAR(15)          PRIMARY KEY,
+   CIN_ID               VARCHAR(50)          PRIMARY KEY,
    CIN_NAMA             VARCHAR(50),
    CIN_LOKASI           VARCHAR(50)          NOT NULL,
    CIN_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
@@ -25,8 +25,8 @@ create table BIOSKOP (
 /* Table: FILM                                                  */
 /*==============================================================*/
 create table FILM (
-   MOV_ID               VARCHAR(15)          PRIMARY KEY,
-   CAT_ID               VARCHAR(15)          NOT NULL,
+   MOV_ID               VARCHAR(50)          PRIMARY KEY,
+   CAT_ID               VARCHAR(50)          NOT NULL,
    MOV_JUDUL            VARCHAR(50)          NOT NULL,
    MOV_DURASI           INTEGER              NOT NULL,
    MOV_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
@@ -37,9 +37,9 @@ create table FILM (
 /* Table: JADWAL                                                */
 /*==============================================================*/
 create table JADWAL (
-   SCH_ID               VARCHAR(15)          PRIMARY KEY,
-   MOV_ID               VARCHAR(15)          NOT NULL,
-   STD_ID               VARCHAR(15)          NOT NULL,
+   SCH_ID               VARCHAR(50)          PRIMARY KEY,
+   MOV_ID               VARCHAR(50)          NOT NULL,
+   STD_ID               VARCHAR(50)          NOT NULL,
    SCH_WAKTU            TIMESTAMPTZ          NOT NULL,
    SCH_HARGA            INTEGER,
    SCH_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
@@ -50,7 +50,7 @@ create table JADWAL (
 /* Table: KATEGORI_FILM                                         */
 /*==============================================================*/
 create table KATEGORI_FILM (
-   CAT_ID               VARCHAR(15)          PRIMARY KEY,
+   CAT_ID               VARCHAR(50)          PRIMARY KEY,
    CAT_NAMA             VARCHAR(50)          NOT NULL,
    CAT_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CAT_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
@@ -60,9 +60,9 @@ create table KATEGORI_FILM (
 /* Table: KURSI                                                 */
 /*==============================================================*/
 create table KURSI (
-   CHR_ID               VARCHAR(15)          PRIMARY KEY,
-   TIK_ID               VARCHAR(15)          NOT NULL,
-   SCH_ID               VARCHAR(15)          NOT NULL,
+   CHR_ID               VARCHAR(50)          PRIMARY KEY,
+   TIK_ID               VARCHAR(50)          NOT NULL,
+   SCH_ID               VARCHAR(50)          NOT NULL,
    CHR_KODE             VARCHAR(3)           NOT NULL,
    CHR_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CHR_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
@@ -72,8 +72,8 @@ create table KURSI (
 /* Table: METODE_PEMBAYARAN                                     */
 /*==============================================================*/
 create table METODE_PEMBAYARAN (
-   MTD_ID               VARCHAR(15)          PRIMARY KEY,
-   PEL_ID               VARCHAR(15)          NOT NULL,
+   MTD_ID               VARCHAR(50)          PRIMARY KEY,
+   PEL_ID               VARCHAR(50)          NOT NULL,
    MTD_JENIS            VARCHAR(10)          NOT NULL,
    MTD_BANK             VARCHAR(10)          NOT NULL,
    MTD_NOMOR_KARTU      VARCHAR(16)          NOT NULL,
@@ -87,10 +87,10 @@ create table METODE_PEMBAYARAN (
 /* Table: PELANGGAN                                             */
 /*==============================================================*/
 create table PELANGGAN (
-   PEL_ID               VARCHAR(15)          PRIMARY KEY,
+   PEL_ID               VARCHAR(50)          PRIMARY KEY,
    PEL_NAMA             VARCHAR(50)          NOT NULL,
    PEL_EMAIL            VARCHAR(50)          NOT NULL,
-   PEL_NO_TELEPON       VARCHAR(15)          NOT NULL,
+   PEL_NO_TELEPON       VARCHAR(50)          NOT NULL,
    PEL_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    PEL_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -99,8 +99,8 @@ create table PELANGGAN (
 /* Table: DetailVoucher                                         */
 /*==============================================================*/
 create table DETAIL_VOUCHER (
-   TRX_ID               VARCHAR(15),
-   VOC_ID               VARCHAR(15),
+   TRX_ID               VARCHAR(50),
+   VOC_ID               VARCHAR(50),
    DV_Created_At        TIMESTAMPTZ          DEFAULT NOW(),
    DV_Updated_At        TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -109,8 +109,8 @@ create table DETAIL_VOUCHER (
 /* Table: STUDIO                                                */
 /*==============================================================*/
 create table STUDIO (
-   STD_ID               VARCHAR(15)          PRIMARY KEY,
-   CIN_ID               VARCHAR(15)          NOT NULL,
+   STD_ID               VARCHAR(50)          PRIMARY KEY,
+   CIN_ID               VARCHAR(50)          NOT NULL,
    STD_KAPASITAS        INTEGER                 NOT NULL,
    STD_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    STD_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
@@ -120,9 +120,9 @@ create table STUDIO (
 /* Table: TIKET                                                 */
 /*==============================================================*/
 create table TIKET (
-   TIK_ID               VARCHAR(15)          PRIMARY KEY,
-   TRX_ID               VARCHAR(15)          NOT NULL,
-   CHR_ID               VARCHAR(15)          NOT NULL,
+   TIK_ID               VARCHAR(50)          PRIMARY KEY,
+   TRX_ID               VARCHAR(50)          NOT NULL,
+   CHR_ID               VARCHAR(50)          NOT NULL,
    TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -131,9 +131,9 @@ create table TIKET (
 /* Table: TRANSAKSI                                             */
 /*==============================================================*/
 create table TRANSAKSI (
-   TRX_ID               VARCHAR(15)          PRIMARY KEY,
-   PEL_ID               VARCHAR(15)          NOT NULL,
-   MTD_ID               VARCHAR(15)          NOT NULL,
+   TRX_ID               VARCHAR(50)          PRIMARY KEY,
+   PEL_ID               VARCHAR(50)          NOT NULL,
+   MTD_ID               VARCHAR(50)          NOT NULL,
    TRX_TOTAL_HARGA      INTEGER,
    TRX_TOTAL_TIKET      INTEGER,
    TRX_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
@@ -144,8 +144,8 @@ create table TRANSAKSI (
 /* Table: VOUCHER                                               */
 /*==============================================================*/
 create table VOUCHER (
-   VOC_ID               VARCHAR(15)          PRIMARY KEY,
-   VOC_KODE_VOUCHER     VARCHAR(15)          NOT NULL,
+   VOC_ID               VARCHAR(50)          PRIMARY KEY,
+   VOC_KODE_VOUCHER     VARCHAR(50)          NOT NULL,
    VOC_NOMINAL          INTEGER              NOT NULL,
    VOC_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    VOC_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()

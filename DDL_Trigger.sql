@@ -246,7 +246,7 @@ CREATE OR REPLACE FUNCTION DV_UpdatedAtAutomation() RETURNS TRIGGER AS $DV_Updat
     END;
 $DV_UpdatedAtAutomation$ LANGUAGE plpgsql;
 
-CREATE TRIGGER DV_UpdatedAtAutomation BEFORE UPDATE ON DetailVoucher
+CREATE TRIGGER DV_UpdatedAtAutomation BEFORE UPDATE ON Detail_Voucher
 FOR EACH ROW EXECUTE FUNCTION DV_UpdatedAtAutomation();
 
 /*==============================================================*/
