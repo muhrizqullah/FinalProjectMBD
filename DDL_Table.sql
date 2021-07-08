@@ -73,7 +73,7 @@ create table KURSI (
 create table METODE_PEMBAYARAN (
    MTD_ID               VARCHAR(15)          PRIMARY KEY,
    PEL_ID               VARCHAR(15)          NOT NULL,
-   MTD_JENIS            VARCHAR(10)          CHECK (MTD_JENIS IN ( 'DEBIT', 'KREDIT')),
+   MTD_JENIS            VARCHAR(10)          NOT NULL,
    MTD_BANK             VARCHAR(10)          NOT NULL,
    MTD_NOMOR_KARTU      VARCHAR(16)          NOT NULL,
    MTD_EXPIRED          VARCHAR(4)           NOT NULL,
@@ -120,12 +120,8 @@ create table STUDIO (
 /*==============================================================*/
 create table TIKET (
    TIK_ID               VARCHAR(15)          PRIMARY KEY,
-   MOV_ID               VARCHAR(15)          NOT NULL,
    TRX_ID               VARCHAR(15)          NOT NULL,
-   SCH_ID               VARCHAR(15)          NOT NULL,
-   CIN_ID               VARCHAR(15)          NOT NULL,
-   STD_ID               VARCHAR(15)          NOT NULL,
-   CHR_ID               VARCHAR(15)          null,
+   CHR_ID               VARCHAR(15)          NOT NULL,
    TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
