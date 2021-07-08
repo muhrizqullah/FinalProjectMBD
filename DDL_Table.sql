@@ -1,14 +1,14 @@
-CREATE SEQUENCE Bioskop_Seq;
-CREATE SEQUENCE Film_Seq;
-CREATE SEQUENCE Jadwal_Seq;
-CREATE SEQUENCE Kategori_Seq;
-CREATE SEQUENCE Kursi_Seq;
-CREATE SEQUENCE Metode_Seq;
-CREATE SEQUENCE Pelanggan_Seq;
-CREATE SEQUENCE Studio_Seq;
-CREATE SEQUENCE Tiket_Seq;
-CREATE SEQUENCE Transaksi_Seq;
-CREATE SEQUENCE Voucher_Seq;
+CREATE SEQUENCE Bioskop_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Film_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Jadwal_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Kategori_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Kursi_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Metode_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Pelanggan_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Studio_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Tiket_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Transaksi_Seq START 0 MINVALUE 0;
+CREATE SEQUENCE Voucher_Seq START 0 MINVALUE 0;
 
 /*==============================================================*/
 /* Table: BIOSKOP                                               */
@@ -57,12 +57,22 @@ create table KATEGORI_FILM (
 );
 
 /*==============================================================*/
+/* Table: TIKET                                                 */
+/*==============================================================*/
+create table TIKET (
+   TIK_ID               VARCHAR(50)          PRIMARY KEY,
+   TRX_ID               VARCHAR(50)          NOT NULL,
+   SCH_ID               VARCHAR(50)          NOT NULL,
+   CHR_KODE               VARCHAR(50)          NOT NULL,
+   TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
+   TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
+);
+
+/*==============================================================*/
 /* Table: KURSI                                                 */
 /*==============================================================*/
 create table KURSI (
    CHR_ID               VARCHAR(50)          PRIMARY KEY,
-   TIK_ID               VARCHAR(50)          NOT NULL,
-   SCH_ID               VARCHAR(50)          NOT NULL,
    CHR_KODE             VARCHAR(20)           NOT NULL,
    CHR_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CHR_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
@@ -114,17 +124,6 @@ create table STUDIO (
    STD_KAPASITAS        INTEGER                 NOT NULL,
    STD_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    STD_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
-);
-
-/*==============================================================*/
-/* Table: TIKET                                                 */
-/*==============================================================*/
-create table TIKET (
-   TIK_ID               VARCHAR(50)          PRIMARY KEY,
-   TRX_ID               VARCHAR(50)          NOT NULL,
-   CHR_ID               VARCHAR(50)          NOT NULL,
-   TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
-   TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
 
 /*==============================================================*/
