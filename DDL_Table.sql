@@ -61,6 +61,7 @@ create table KATEGORI_FILM (
 /*==============================================================*/
 create table KURSI (
    CHR_ID               VARCHAR(15)          PRIMARY KEY,
+   TIK_ID               VARCHAR(15)          NOT NULL,
    SCH_ID               VARCHAR(15)          NOT NULL,
    CHR_KODE             VARCHAR(3)           NOT NULL,
    CHR_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
