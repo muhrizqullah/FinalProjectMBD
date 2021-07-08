@@ -62,8 +62,7 @@ create table KATEGORI_FILM (
 create table TIKET (
    TIK_ID               VARCHAR(50)          PRIMARY KEY,
    TRX_ID               VARCHAR(50)          NOT NULL,
-   SCH_ID               VARCHAR(50)          NOT NULL,
-   CHR_KODE               VARCHAR(50)          NOT NULL,
+   CHR_ID               VARCHAR(50)          NOT NULL,
    TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -74,6 +73,7 @@ create table TIKET (
 create table KURSI (
    CHR_ID               VARCHAR(50)          PRIMARY KEY,
    CHR_KODE             VARCHAR(20)           NOT NULL,
+   SCH_ID               VARCHAR(50)          NOT NULL,
    CHR_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CHR_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
