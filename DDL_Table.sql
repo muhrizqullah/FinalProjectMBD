@@ -16,7 +16,7 @@ CREATE SEQUENCE Voucher_Seq;
 create table BIOSKOP (
    CIN_ID               VARCHAR(15)          PRIMARY KEY,
    CIN_NAMA             VARCHAR(50),
-   CIN_LOKASI           VARCHAR(50)          not null,
+   CIN_LOKASI           VARCHAR(50)          NOT NULL,
    CIN_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CIN_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -26,9 +26,9 @@ create table BIOSKOP (
 /*==============================================================*/
 create table FILM (
    MOV_ID               VARCHAR(15)          PRIMARY KEY,
-   CAT_ID               VARCHAR(15)          not null,
-   MOV_JUDUL            VARCHAR(50)          not null,
-   MOV_DURASI           INTEGER              not null,
+   CAT_ID               VARCHAR(15)          NOT NULL,
+   MOV_JUDUL            VARCHAR(50)          NOT NULL,
+   MOV_DURASI           INTEGER              NOT NULL,
    MOV_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    MOV_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -38,9 +38,9 @@ create table FILM (
 /*==============================================================*/
 create table JADWAL (
    SCH_ID               VARCHAR(15)          PRIMARY KEY,
-   MOV_ID               VARCHAR(15)          not null,
-   STD_ID               VARCHAR(15)          not null,
-   SCH_WAKTU            TIMESTAMPTZ          not null,
+   MOV_ID               VARCHAR(15)          NOT NULL,
+   STD_ID               VARCHAR(15)          NOT NULL,
+   SCH_WAKTU            TIMESTAMPTZ          NOT NULL,
    SCH_HARGA            INTEGER,
    SCH_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    SCH_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
@@ -51,7 +51,7 @@ create table JADWAL (
 /*==============================================================*/
 create table KATEGORI_FILM (
    CAT_ID               VARCHAR(15)          PRIMARY KEY,
-   CAT_NAMA             VARCHAR(50)          not null,
+   CAT_NAMA             VARCHAR(50)          NOT NULL,
    CAT_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CAT_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -61,8 +61,8 @@ create table KATEGORI_FILM (
 /*==============================================================*/
 create table KURSI (
    CHR_ID               VARCHAR(15)          PRIMARY KEY,
-   SCH_ID               VARCHAR(15)          not null,
-   CHR_KODE             VARCHAR(3)           not null,
+   SCH_ID               VARCHAR(15)          NOT NULL,
+   CHR_KODE             VARCHAR(3)           NOT NULL,
    CHR_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    CHR_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -72,12 +72,12 @@ create table KURSI (
 /*==============================================================*/
 create table METODE_PEMBAYARAN (
    MTD_ID               VARCHAR(15)          PRIMARY KEY,
-   PEL_ID               VARCHAR(15)          not null,
+   PEL_ID               VARCHAR(15)          NOT NULL,
    MTD_JENIS            VARCHAR(10)          CHECK (MTD_JENIS IN ( 'DEBIT', 'KREDIT')),
-   MTD_BANK             VARCHAR(10)          not null,
-   MTD_NOMOR_KARTU      VARCHAR(16)          not null,
-   MTD_EXPIRED          VARCHAR(4)           not null,
-   MTD_CVV              VARCHAR(3)           not null,
+   MTD_BANK             VARCHAR(10)          NOT NULL,
+   MTD_NOMOR_KARTU      VARCHAR(16)          NOT NULL,
+   MTD_EXPIRED          VARCHAR(4)           NOT NULL,
+   MTD_CVV              VARCHAR(3)           NOT NULL,
    MTD_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    MTD_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -87,9 +87,9 @@ create table METODE_PEMBAYARAN (
 /*==============================================================*/
 create table PELANGGAN (
    PEL_ID               VARCHAR(15)          PRIMARY KEY,
-   PEL_NAMA             VARCHAR(50)          not null,
-   PEL_EMAIL            VARCHAR(50)          not null,
-   PEL_NO_TELEPON       VARCHAR(15)          not null,
+   PEL_NAMA             VARCHAR(50)          NOT NULL,
+   PEL_EMAIL            VARCHAR(50)          NOT NULL,
+   PEL_NO_TELEPON       VARCHAR(15)          NOT NULL,
    PEL_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    PEL_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -109,8 +109,8 @@ create table DetailVoucher (
 /*==============================================================*/
 create table STUDIO (
    STD_ID               VARCHAR(15)          PRIMARY KEY,
-   CIN_ID               VARCHAR(15)          not null,
-   STD_KAPASITAS        INTEGER                 not null,
+   CIN_ID               VARCHAR(15)          NOT NULL,
+   STD_KAPASITAS        INTEGER                 NOT NULL,
    STD_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    STD_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
@@ -120,11 +120,11 @@ create table STUDIO (
 /*==============================================================*/
 create table TIKET (
    TIK_ID               VARCHAR(15)          PRIMARY KEY,
-   MOV_ID               VARCHAR(15)          not null,
-   TRX_ID               VARCHAR(15)          not null,
-   SCH_ID               VARCHAR(15)          not null,
-   CIN_ID               VARCHAR(15)          not null,
-   STD_ID               VARCHAR(15)          not null,
+   MOV_ID               VARCHAR(15)          NOT NULL,
+   TRX_ID               VARCHAR(15)          NOT NULL,
+   SCH_ID               VARCHAR(15)          NOT NULL,
+   CIN_ID               VARCHAR(15)          NOT NULL,
+   STD_ID               VARCHAR(15)          NOT NULL,
    CHR_ID               VARCHAR(15)          null,
    TIK_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    TIK_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
@@ -135,8 +135,8 @@ create table TIKET (
 /*==============================================================*/
 create table TRANSAKSI (
    TRX_ID               VARCHAR(15)          PRIMARY KEY,
-   PEL_ID               VARCHAR(15)          not null,
-   MTD_ID               VARCHAR(15)          not null,
+   PEL_ID               VARCHAR(15)          NOT NULL,
+   MTD_ID               VARCHAR(15)          NOT NULL,
    TRX_TOTAL_HARGA      INTEGER,
    TRX_TOTAL_TIKET      INTEGER,
    TRX_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
@@ -148,11 +148,12 @@ create table TRANSAKSI (
 /*==============================================================*/
 create table VOUCHER (
    VOC_ID               VARCHAR(15)          PRIMARY KEY,
-   VOC_KODE_VOUCHER     VARCHAR(15)          not null,
-   VOC_NOMINAL          INTEGER              not null,
+   VOC_KODE_VOUCHER     VARCHAR(15)          NOT NULL,
+   VOC_NOMINAL          INTEGER              NOT NULL,
    VOC_CREATED_AT       TIMESTAMPTZ          DEFAULT NOW(),
    VOC_UPDATED_AT       TIMESTAMPTZ          DEFAULT NOW()
 );
+
 
 
 alter table FILM
@@ -175,11 +176,11 @@ alter table METODE_PEMBAYARAN
    add constraint FK_METODE_P_RELATIONS_PELANGGA foreign key (PEL_ID)
       references PELANGGAN (PEL_ID);
 
-alter table DetailVoucher
+alter table RELATIONSHIP_8
    add constraint FK_RELATION_RELATIONS_TRANSAKS foreign key (TRX_ID)
       references TRANSAKSI (TRX_ID);
 
-alter table DetailVoucher
+alter table RELATIONSHIP_8
    add constraint FK_RELATION_RELATIONS_VOUCHER foreign key (VOC_ID)
       references VOUCHER (VOC_ID);
 
@@ -192,24 +193,8 @@ alter table TIKET
       references TRANSAKSI (TRX_ID);
 
 alter table TIKET
-   add constraint FK_TIKET_RELATIONS_JADWAL foreign key (SCH_ID)
-      references JADWAL (SCH_ID);
-
-alter table TIKET
-   add constraint FK_TIKET_RELATIONS_STUDIO foreign key (STD_ID)
-      references STUDIO (STD_ID);
-
-alter table TIKET
    add constraint FK_TIKET_RELATIONS_KURSI foreign key (CHR_ID)
       references KURSI (CHR_ID);
-
-alter table TIKET
-   add constraint FK_TIKET_RELATIONS_FILM foreign key (MOV_ID)
-      references FILM (MOV_ID);
-
-alter table TIKET
-   add constraint FK_TIKET_RELATIONS_BIOSKOP foreign key (CIN_ID)
-      references BIOSKOP (CIN_ID);
 
 alter table TRANSAKSI
    add constraint FK_TRANSAKS_RELATIONS_METODE_P foreign key (MTD_ID)
