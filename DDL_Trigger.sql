@@ -5,7 +5,7 @@
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION CIN_IDIncrement() RETURNS TRIGGER AS $CIN_IDIncrement$
     BEGIN
-        NEW.CIN_ID = (SELECT 'CIN'||to_char(nextval('Bioskop_Seq'), '000000FM')::VARCHAR(50));
+        NEW.CIN_ID = (SELECT nextval('Bioskop_Seq'));
         RETURN NEW;
     END;
 $CIN_IDIncrement$ LANGUAGE plpgsql;
@@ -18,7 +18,7 @@ FOR EACH ROW EXECUTE FUNCTION CIN_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION MOV_IDIncrement() RETURNS TRIGGER AS $MOV_IDIncrement$
     BEGIN
-        NEW.MOV_ID = (SELECT 'MOV'||to_char(nextval('Film_Seq'), '000000FM')::VARCHAR(50));
+        NEW.MOV_ID = (SELECT nextval('Film_Seq'));
         RETURN NEW;
     END;
 $MOV_IDIncrement$ LANGUAGE plpgsql;
@@ -31,7 +31,7 @@ FOR EACH ROW EXECUTE FUNCTION MOV_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION SCH_IDIncrement() RETURNS TRIGGER AS $SCH_IDIncrement$
     BEGIN
-        NEW.SCH_ID = (SELECT 'SCH'||to_char(nextval('Jadwal_Seq'), '000000FM')::VARCHAR(50));
+        NEW.SCH_ID = (SELECT nextval('Jadwal_Seq'));
         RETURN NEW;
     END;
 $SCH_IDIncrement$ LANGUAGE plpgsql;
@@ -44,7 +44,7 @@ FOR EACH ROW EXECUTE FUNCTION SCH_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION CAT_IDIncrement() RETURNS TRIGGER AS $CAT_IDIncrement$
     BEGIN
-        NEW.CAT_ID = (SELECT 'CAT'||to_char(nextval('Kategori_Seq'), '000000FM')::VARCHAR(50));
+        NEW.CAT_ID = (SELECT nextval('Kategori_Seq'));
         RETURN NEW;
     END;
 $CAT_IDIncrement$ LANGUAGE plpgsql;
@@ -57,7 +57,7 @@ FOR EACH ROW EXECUTE FUNCTION CAT_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION CHR_IDIncrement() RETURNS TRIGGER AS $CHR_IDIncrement$
     BEGIN
-        NEW.CHR_ID = (SELECT 'CHR'||to_char(nextval('Kursi_Seq'), '000000FM')::VARCHAR(50));
+        NEW.CHR_ID = (SELECT nextval('Kursi_Seq'));
         RETURN NEW;
     END;
 $CHR_IDIncrement$ LANGUAGE plpgsql;
@@ -70,7 +70,7 @@ FOR EACH ROW EXECUTE FUNCTION CHR_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION MTD_IDIncrement() RETURNS TRIGGER AS $MTD_IDIncrement$
     BEGIN
-        NEW.MTD_ID = (SELECT 'MTD'||to_char(nextval('Metode_Seq'), '000000FM')::VARCHAR(50));
+        NEW.MTD_ID = (SELECT nextval('Metode_Seq'));
         RETURN NEW;
     END;
 $MTD_IDIncrement$ LANGUAGE plpgsql;
@@ -83,7 +83,7 @@ FOR EACH ROW EXECUTE FUNCTION MTD_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION PEL_IDIncrement() RETURNS TRIGGER AS $PEL_IDIncrement$
     BEGIN
-        NEW.PEL_ID = (SELECT 'PEL'||to_char(nextval('Pelanggan_Seq'), '000000FM')::VARCHAR(50));
+        NEW.PEL_ID = (SELECT nextval('Pelanggan_Seq'));
         RETURN NEW;
     END;
 $PEL_IDIncrement$ LANGUAGE plpgsql;
@@ -96,7 +96,7 @@ FOR EACH ROW EXECUTE FUNCTION PEL_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION STD_IDIncrement() RETURNS TRIGGER AS $STD_IDIncrement$
     BEGIN
-        NEW.STD_ID = (SELECT 'STD'||to_char(nextval('Studio_Seq'), '000000FM')::VARCHAR(50));
+        NEW.STD_ID = (SELECT nextval('Studio_Seq'));
         RETURN NEW;
     END;
 $STD_IDIncrement$ LANGUAGE plpgsql;
@@ -109,7 +109,7 @@ FOR EACH ROW EXECUTE FUNCTION STD_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION TIK_IDIncrement() RETURNS TRIGGER AS $TIK_IDIncrement$
     BEGIN
-        NEW.TIK_ID = (SELECT 'TIK'||to_char(nextval('Tiket_Seq'), '000000FM')::VARCHAR(50));
+        NEW.TIK_ID = (SELECT nextval('Tiket_Seq'));
         RETURN NEW;
     END;
 $TIK_IDIncrement$ LANGUAGE plpgsql;
@@ -122,7 +122,7 @@ FOR EACH ROW EXECUTE FUNCTION TIK_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION TRX_IDIncrement() RETURNS TRIGGER AS $TRX_IDIncrement$
     BEGIN
-        NEW.TRX_ID = (SELECT 'TRX'||to_char(nextval('Transaksi_Seq'), '000000FM')::VARCHAR(50));
+        NEW.TRX_ID = (SELECT nextval('Transaksi_Seq'));
         RETURN NEW;
     END;
 $TRX_IDIncrement$ LANGUAGE plpgsql;
@@ -135,7 +135,7 @@ FOR EACH ROW EXECUTE FUNCTION TRX_IDIncrement();
 /*==============================================================*/
 CREATE OR REPLACE FUNCTION VOC_IDIncrement() RETURNS TRIGGER AS $VOC_IDIncrement$
     BEGIN
-        NEW.VOC_ID = (SELECT 'VOC'||to_char(nextval('Voucher_Seq'), '000000FM')::VARCHAR(50));
+        NEW.VOC_ID = (SELECT nextval('Voucher_Seq'));
         RETURN NEW;
     END;
 $VOC_IDIncrement$ LANGUAGE plpgsql;
