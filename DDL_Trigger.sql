@@ -370,16 +370,14 @@ CREATE OR REPLACE FUNCTION checkSeatsAvailability() RETURNS TRIGGER AS $checkSea
     BEGIN
         -- Weekends
         IF(SELECT EXISTS (SELECT FALSE FROM KURSI WHERE CHR_KODE = NEW.CHR_KODE)) THEN
-			RAISE SQLSTATE '70005' USING MESSAGE = 'Kursi Tidak Tersedia!';
         -- Weekdays
         ELSEIF((SELECT COUNT(CHR_ID) FROM KURSI WHERE SCH_ID = NEW.SCH_ID) >= (SELECT STD_KAPASITAS FROM STUDIO WHERE STD_ID = (
                                                                                SELECT STD_ID FROM JADWAL WHERE SCH_ID = NEW.SCH_ID))) THEN
-            RAISE SQLSTATE '70005' USING MESSAGE = 'Kursi Penuh Pada Jadwal Ini!';
         ELSE
             RETURN NEW;
-		END IF;
+  END IF;
     END;
 $checkSeatsAvailability$ LANGUAGE plpgsql;
 
 CREATE TRIGGER checkSeatsAvailability BEFORE INSERT ON KURSI
-FOR EACH ROW EXECUTE FUNCTION checkSeatsAvailability();
+FOR EACH ROW EXECUTE FUNCTION checkSeatsAvailability()
