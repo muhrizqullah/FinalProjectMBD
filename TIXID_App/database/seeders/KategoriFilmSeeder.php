@@ -28,7 +28,7 @@ class KategoriFilmSeeder extends Seeder
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($kategoriData, 100000);
+        $chunks = array_chunk($kategoriData, 10000);
         foreach($chunks as $chunk) {
             DB::table('kategori_film')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

@@ -28,12 +28,14 @@ class TransaksiSeeder extends Seeder
         {
             $kategoriData[] = [
                 'pel_id'            => $pel_ids[array_rand($pel_ids)],
-                'mtd_id'            => $mtd_ids[array_rand($mtd_ids)]
+                'mtd_id'            => $mtd_ids[array_rand($mtd_ids)],
+                'trx_total_tiket'   => $faker->numberBetween(1,20),
+                'trx_total_harga'   => $faker->numberBetween(35000, 1000000)
             ];
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($kategoriData, 100000);
+        $chunks = array_chunk($kategoriData, 10000);
         foreach($chunks as $chunk) {
             DB::table('transaksi')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

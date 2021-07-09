@@ -37,7 +37,7 @@ class TiketSeeder extends Seeder
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($tiketData, 100000);
+        $chunks = array_chunk($tiketData, 10000);
         foreach($chunks as $chunk) {
             DB::table('tiket')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

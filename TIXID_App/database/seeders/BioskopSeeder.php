@@ -28,7 +28,7 @@ class BioskopSeeder extends Seeder
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($bioskopData, 100000);
+        $chunks = array_chunk($bioskopData, 10000);
         foreach($chunks as $chunk) {
             DB::table('bioskop')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

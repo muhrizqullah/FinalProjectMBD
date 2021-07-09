@@ -14,17 +14,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            BioskopSeeder::class,
+             StudioSeeder::class,
+              KategoriFilmSeeder::class,
+            FilmSeeder::class,
+             JadwalSeeder::class,
             PelangganSeeder::class,
             MetodePembayaranSeeder::class,
-            VoucherSeeder::class,
-            KategoriFilmSeeder::class,
-            FilmSeeder::class,
-            BioskopSeeder::class,
-            StudioSeeder::class,
-            JadwalSeeder::class,
             TransaksiSeeder::class,
+              KursiSeeder::class,
+            VoucherSeeder::class,
             DetailVoucherSeeder::class,
-            KursiSeeder::class,
             TiketSeeder::class,
         ]);
     }

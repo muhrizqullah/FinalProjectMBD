@@ -28,7 +28,7 @@ class VoucherSeeder extends Seeder
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($voucherData, 100000);
+        $chunks = array_chunk($voucherData, 10000);
         foreach($chunks as $chunk) {
             DB::table('voucher')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

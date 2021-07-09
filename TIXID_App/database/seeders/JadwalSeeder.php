@@ -34,7 +34,7 @@ class JadwalSeeder extends Seeder
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($jadwalData, 100000);
+        $chunks = array_chunk($jadwalData, 10000);
         foreach($chunks as $chunk) {
             DB::table('jadwal')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

@@ -9,7 +9,7 @@ class Transaksi extends Model
 {
     use HasFactory;
     protected $table = "transaksi";
-    protected $fillable = ['pel_id', 'mtd_id'];
+    protected $fillable = ['pel_id', 'mtd_id', 'trx_total_harga', 'trx_total_tiket'];
     protected $primaryKey = "trx_id";
 
     public function pelanggan()
@@ -31,4 +31,6 @@ class Transaksi extends Model
     {
         return $this->belongsToMany(Voucher::class, "detail_voucher");
     }
+
+    
 }
