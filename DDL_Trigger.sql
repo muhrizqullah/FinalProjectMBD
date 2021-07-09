@@ -333,11 +333,12 @@ CREATE OR REPLACE FUNCTION PriceAutomation() RETURNS TRIGGER AS $PriceAutomation
 				WHERE TRX_ID = NEW.TRX_ID;
 			-- Update Total Harga
 			UPDATE Transaksi SET TRX_TOTAL_HARGA = (SELECT SUM(SCH_HARGA) 
-													FROM TIKET JOIN JADWAL ON TIKET.SCH_ID = JADWAL.SCH_ID
-													WHERE TIKET.TRX_ID = NEW.TRX_ID) -
+													FROM TIKET, KURSI, JADWAL
+													WHERE TIKET.CHR_ID = KURSI.CHR_ID AND KURSI.SCH_ID = JADWAL.SCH_ID
+													AND TIKET.TRX_ID = NEW.TRX_ID) -
                                                     (SELECT SUM(VOC_NOMINAL)
-                                                    FROM VOUCHER, TRANSAKSI, DetailVoucher
-                                                    WHERE DetailVoucher.TRX_ID = TRANSAKSI.TRX_ID AND DetailVoucher.VOC_ID = VOUCHER.VOC_ID 
+                                                    FROM VOUCHER, TRANSAKSI, DETAIL_VOUCHER
+                                                    WHERE DETAIL_VOUCHER.TRX_ID = TRANSAKSI.TRX_ID AND DETAIL_VOUCHER.VOC_ID = VOUCHER.VOC_ID 
                                                     AND TRANSAKSI.TRX_ID=NEW.TRX_ID)
 				WHERE TRX_ID = NEW.TRX_ID;
 		ELSIF (TG_OP = 'DELETE') THEN
@@ -345,12 +346,13 @@ CREATE OR REPLACE FUNCTION PriceAutomation() RETURNS TRIGGER AS $PriceAutomation
 				WHERE TRX_ID = OLD.TRX_ID;
 			-- Update Total Harga
 			UPDATE TRANSAKSI SET TRX_TOTAL_HARGA = (SELECT SUM(SCH_HARGA) 
-													    FROM TIKET JOIN JADWAL ON TIKET.SCH_ID = JADWAL.SCH_ID
-													    WHERE TIKET.TRX_ID = OLD.TRX_ID) -
-                                                        (SELECT SUM(VOC_NOMINAL)
-                                                        FROM VOUCHER, TRANSAKSI, DetailVoucher
-                                                        WHERE DetailVoucher.TRX_ID = TRANSAKSI.TRX_ID AND DetailVoucher.VOC_ID = VOUCHER.VOC_ID 
-                                                        AND TRANSAKSI.TRX_ID=OLD.TRX_ID)
+													FROM TIKET, KURSI, JADWAL
+													WHERE TIKET.CHR_ID = KURSI.CHR_ID AND KURSI.SCH_ID = JADWAL.SCH_ID
+													AND TIKET.TRX_ID = OLD.TRX_ID) - 
+													(SELECT SUM(VOC_NOMINAL) 
+													FROM VOUCHER, TRANSAKSI, DetailVoucher
+                                                    WHERE DetailVoucher.TRX_ID = TRANSAKSI.TRX_ID AND DetailVoucher.VOC_ID = VOUCHER.VOC_ID 
+                                                    AND TRANSAKSI.TRX_ID=OLD.TRX_ID)
 				WHERE TRX_ID = OLD.TRX_ID;
 		END IF;
 		RETURN NEW;
