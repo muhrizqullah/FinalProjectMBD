@@ -24,7 +24,7 @@ class KursiSeeder extends Seeder
 
     $Jadwal_ids = Jadwal::all()->pluck('sch_id')->toArray();
 
-    for($i = 1;$i <= 10;$i++){
+    for($i = 1;$i <= 50000; $i++){
         $KursiData[]= [
             'sch_id'                => $Jadwal_ids[array_rand($Jadwal_ids)],
             'chr_kode'              => $faker->bothify('?-##')
@@ -33,7 +33,7 @@ class KursiSeeder extends Seeder
         echo 'Creating data: ' .$i.PHP_EOL;
     }
 
-        $chunks = array_chunk($KursiData, 100000);
+        $chunks = array_chunk($KursiData, 10000);
         foreach($chunks as $chunk) {
             DB::table('kursi')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

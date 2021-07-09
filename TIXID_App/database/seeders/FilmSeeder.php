@@ -22,7 +22,7 @@ class FilmSeeder extends Seeder
 
         $category_ids = KategoriFilm::all()->pluck('cat_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 200; $i++)
         {
             $filmData[] = [
                 'cat_id'                => $category_ids[array_rand($category_ids)],

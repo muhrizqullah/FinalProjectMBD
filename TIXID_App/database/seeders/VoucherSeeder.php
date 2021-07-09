@@ -19,7 +19,7 @@ class VoucherSeeder extends Seeder
         ini_set('memory_limit', '-1');
         $faker = Faker::create();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 500; $i++)
         {
             $voucherData[] = [
                 'voc_kode_voucher'       => $faker->word(),

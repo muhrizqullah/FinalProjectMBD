@@ -19,7 +19,7 @@ class PelangganSeeder extends Seeder
 
          $faker = Faker::create();
 
-         for($i = 1; $i <= 10; $i++)
+         for($i = 1; $i <= 10000; $i++)
          {
              $pelangganData[] = [
                  'pel_nama'             => $faker->name(),

@@ -23,7 +23,7 @@ class DetailVoucherSeeder extends Seeder
         $Voucher_ids = Voucher::all()->pluck('voc_id')->toArray();
         $Transaksi_ids = Transaksi::all()->pluck('trx_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 1000; $i++)
         {
             $detailVoucherData[] = [
                 'trx_id'                => $Transaksi_ids[array_rand($Transaksi_ids)],

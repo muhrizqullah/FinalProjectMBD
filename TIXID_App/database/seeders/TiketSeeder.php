@@ -28,7 +28,7 @@ class TiketSeeder extends Seeder
         $trx_id = Transaksi::all()->pluck('trx_id')->toArray();
         $chr_id = Kursi::all()->pluck('chr_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 1000; $i++)
         {
             $tiketData[] = [
                 'trx_id'    => $trx_id[array_rand($trx_id)],

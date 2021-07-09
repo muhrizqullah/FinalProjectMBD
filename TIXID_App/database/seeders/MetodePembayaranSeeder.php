@@ -22,7 +22,7 @@ class MetodePembayaranSeeder extends Seeder
 
         $pel_ids = Pelanggan::all()->pluck('pel_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 15000; $i++)
         {
             $kategoriData[] = [
                 'pel_id'            => $pel_ids[array_rand($pel_ids)],
@@ -35,7 +35,7 @@ class MetodePembayaranSeeder extends Seeder
             echo 'Creating data: '.$i.PHP_EOL;
         }
 
-        $chunks = array_chunk($kategoriData, 100000);
+        $chunks = array_chunk($kategoriData, 10000);
         foreach($chunks as $chunk) {
             DB::table('metode_pembayaran')->insertOrIgnore($chunk);
             echo 'Inserting data...'.PHP_EOL;

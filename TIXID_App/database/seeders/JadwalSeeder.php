@@ -24,12 +24,12 @@ class JadwalSeeder extends Seeder
         $film_ids = Film::all()->pluck('mov_id')->toArray();
         $studio_ids = Studio::all()->pluck('std_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 10000; $i++)
         {
             $jadwalData[] = [
                 'mov_id'                => $film_ids[array_rand($film_ids)],
                 'std_id'                => $studio_ids[array_rand($studio_ids)],
-                'sch_waktu'             => $faker->dateTime()
+                'sch_waktu'             => $faker->dateTimeThisYear(),
             ];
             echo 'Creating data: '.$i.PHP_EOL;
         }

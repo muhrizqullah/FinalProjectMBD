@@ -24,7 +24,7 @@ class TransaksiSeeder extends Seeder
         $pel_ids = Pelanggan::all()->pluck('pel_id')->toArray();
         $mtd_ids = MetodePembayaran::all()->pluck('mtd_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 30000; $i++)
         {
             $kategoriData[] = [
                 'pel_id'            => $pel_ids[array_rand($pel_ids)],

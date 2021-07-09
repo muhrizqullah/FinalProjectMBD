@@ -19,7 +19,7 @@ class BioskopSeeder extends Seeder
 
         $faker = Faker::create();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 100; $i++)
         {
             $bioskopData[] = [
                 'cin_nama'      => $faker->company(),

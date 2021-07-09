@@ -22,7 +22,7 @@ class StudioSeeder extends Seeder
 
         $cin_ids = Bioskop::all()->pluck('cin_id')->toArray();
 
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 1000; $i++)
         {
             $studioData[] = [
                 'cin_id'                 => $cin_ids[array_rand($cin_ids)],
